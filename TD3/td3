@@ -1,0 +1,52 @@
+start
+  = (gram)*
+
+
+gram
+   =right: grammaire {return left}
+
+
+grammaire
+  = final:[$][$]"\n" { return final }   
+   
+
+separation
+   = left:string " = " right:additive { return left+' = '+right }
+
+
+additive
+  = left:soustraction "+" right:additive { return left + right; }
+  / soustraction
+
+
+soustraction
+  = left:exponential "-" right:soustraction { return left - right; }
+  / exponential
+
+
+exponential
+  = left:division "^" right:exponential {return Math.pow(left,right)}
+  / division
+
+  
+division 
+  = left:multiplicative "/" right:division {return left/right}
+  / multiplicative
+
+
+multiplicative
+  = left:primary "*" right:multiplicative { return left * right; }
+  / primary
+
+
+primary
+  = integer
+  / "(" additive:additive ")" { return additive; }
+
+
+integer "integer"
+  = (digits:[0-9]+) { return parseInt(digits.join(""), 10); }
+
+  
+string "string"
+  = variable:([a-zA-Z]+) { return variable.join(""); }
