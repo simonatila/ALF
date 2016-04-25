@@ -1,0 +1,44 @@
+grammar Devoir;
+r : ID EQUAL Expr EOI;
+
+//L'exp mathematique
+Expr : Sum ;
+
+// fonction somme
+Sum : Sub '+' Sum 
+	| Sub
+	;
+
+//fonction difference
+Sub : Exp '-' Sub 
+	| Exp
+	;
+
+//fonction exponentielle
+Exp : Div '^' Exp 
+	| Div
+	;
+
+//fonction division	
+Div : Mul '/' Div 
+	| Mul
+	;
+
+//fonction multiplication
+Mul : Pri '*' Mul 
+	| Pri
+	;
+
+//priorite des opperations
+Pri : INT
+	| '('Sum')' 
+	;
+
+INT : [0-9]+ ;
+//numele variabilei
+ID : [a-zA-Z]+ ;
+ 
+EQUAL : ' = ' ;
+
+//End Of Input
+EOI : ' &&' ;
