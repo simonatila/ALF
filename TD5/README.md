@@ -1,0 +1,1 @@
+TD5 : Concevez une machine de Turing pour faire des calculs elementaires en binnaire (addition, substraction, multiplication, division, puisssance 2). Vous pouvez outiliser le site de Khan Academy ou Morphett ou votre propre implementation.
